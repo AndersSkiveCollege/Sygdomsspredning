@@ -36,7 +36,7 @@ public class Person : MonoBehaviour
 
         if (isSick == true)
         {
-            rend.material.color = new Color(0, 1, 0);
+            rend.material.color = new Color(0, 0, 0);
         }
 
         for (int i = 0; i < nearbyAgents.Count; i++)

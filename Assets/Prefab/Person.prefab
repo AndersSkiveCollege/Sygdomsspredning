@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8798533984891446424}
   m_Layer: 0
   m_Name: Person
-  m_TagString: Untagged
+  m_TagString: Person
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cfddc537bd957774891bc2f5f06a641c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,12 +138,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 6601234248065347513}
-  x: 30
-  z: 30
+  x: 60
+  z: 60
   isSick: 0
   nearbyAgents: []
   nearbySickAgents: []
-  infectiousness: 0.3
+  infectiousness: 0.4
   rend: {fileID: 4740414191746779935}
 --- !u!135 &1697640464268941121
 SphereCollider:
