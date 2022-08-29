@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 6601234248065347513}
-  x: 60
-  z: 60
+  x: 100
+  z: 100
   isSick: 0
   nearbyAgents: []
   nearbySickAgents: []

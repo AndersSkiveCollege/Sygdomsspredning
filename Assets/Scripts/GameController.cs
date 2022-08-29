@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameController : MonoBehaviour
 {
@@ -9,19 +10,25 @@ public class GameController : MonoBehaviour
     public float x;
     public float z;
 
-    // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < numberOfAgents; i++)
         {
-            Vector3 randomPos = new Vector3(Random.Range(-x,x), 1, Random.Range(-z,z));     //Random Vector3
-            Instantiate(agent, randomPos,Quaternion.identity);                              //Spawn en agent
+            Vector3 randomPos = new Vector3(Random.Range(-x, x), 1, Random.Range(-z, z));     //Random Vector3
+            Vector3 myPos = new Vector3();                                                    //Lav en tom Vector3
+            myPos = NavMeshUtil.GetRandomPoint(randomPos);                                    //Kald GetRandomPoint og gem i myPos
+            Instantiate(agent, myPos,Quaternion.identity);                                    //Spawn en agent på myPos
         }
     }
+}
 
-    // Update is called once per frame
-    void Update()
+public static class NavMeshUtil
+{
+                                                                                                // Get Random Point on a Navmesh surface
+    public static Vector3 GetRandomPoint(Vector3 pos)
     {
-        
+        NavMeshHit hit;                                                                         // NavMesh Sampling Info Container                                                                                           // from randomPos find a nearest point on NavMesh surface in range of 100
+        NavMesh.SamplePosition(pos, out hit, 100, NavMesh.AllAreas);
+        return hit.position;
     }
 }
