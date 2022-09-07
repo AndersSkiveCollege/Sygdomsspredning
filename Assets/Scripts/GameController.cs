@@ -28,7 +28,7 @@ public static class NavMeshUtil
     public static Vector3 GetRandomPoint(Vector3 pos)
     {
         NavMeshHit hit;                                                                         // NavMesh Sampling Info Container                                                                                           // from randomPos find a nearest point on NavMesh surface in range of 100
-        NavMesh.SamplePosition(pos, out hit, 100, NavMesh.AllAreas);
+        NavMesh.SamplePosition(pos, out hit, 500, NavMesh.AllAreas);
         return hit.position;
     }
 }

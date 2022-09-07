@@ -22,15 +22,17 @@ public class Person : MonoBehaviour
     {
         
         targetPos = new Vector3(Random.Range(-x, x), 1, Random.Range(-z, z));       //Lav en random Vector3
+        targetPos = NavMeshUtil.GetRandomPoint(targetPos);                      //Kalder GetRandomPoint fra NavMeshUtil-klassen som er en hjemmelavet klasse. Tilbage kommer en valid position som var tættest på den pos som blev givet som argument.
         agent.SetDestination(targetPos);                                            //Set agentens destination
     }
 
     
     void Update()
     {
-        if (Vector3.Distance(targetPos,agent.transform.position) < 1)               //Hvis afstanden mellem agent og destination er under 1
+        if (Vector3.Distance(targetPos,agent.transform.position) < 3)               //Hvis afstanden mellem agent og destination er under 1
         {
             targetPos = new Vector3(Random.Range(-x,x), 1, Random.Range(-z, z));    //Lav en random Vector3
+            targetPos = NavMeshUtil.GetRandomPoint(targetPos);                      //Kalder GetRandomPoint fra NavMeshUtil-klassen som er en hjemmelavet klasse. Tilbage kommer en valid position som var tættest på den pos som blev givet som argument.
             agent.SetDestination(targetPos);                                        //Set agentens position
         }
 
