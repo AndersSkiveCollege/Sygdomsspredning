@@ -14,13 +14,14 @@ public class Person : MonoBehaviour
     public List<GameObject> nearbySickAgents = new List<GameObject>();              //Liste til syge agenter i nærheden
     public float infectiousness;
     public Renderer rend;
+    public ParticleSystem flies;
 
     
 
 
     void Start()
     {
-        
+        flies.Stop();
         targetPos = new Vector3(Random.Range(-x, x), 1, Random.Range(-z, z));       //Lav en random Vector3
         targetPos = NavMeshUtil.GetRandomPoint(targetPos);                      //Kalder GetRandomPoint fra NavMeshUtil-klassen som er en hjemmelavet klasse. Tilbage kommer en valid position som var tættest på den pos som blev givet som argument.
         agent.SetDestination(targetPos);                                            //Set agentens destination
@@ -39,6 +40,12 @@ public class Person : MonoBehaviour
         if (isSick == true)
         {
             rend.material.color = new Color(0, 0, 0);
+
+            if (flies.isStopped == true)
+            {
+                flies.Play();
+            }
+            
         }
 
         for (int i = 0; i < nearbyAgents.Count; i++)
