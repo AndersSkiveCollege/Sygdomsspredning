@@ -9,21 +9,23 @@ public class Person : MonoBehaviour
     public NavMeshAgent agent;
     public float x;
     public float z;
-    public bool isSick;
+    public bool isHumanSick;
     public List<GameObject> nearbyAgents = new List<GameObject>();                  //Liste til agenter i nærheden
     public List<GameObject> nearbySickAgents = new List<GameObject>();              //Liste til syge agenter i nærheden
     public float infectiousness;
     public Renderer rend;
     public ParticleSystem flies;
+    public Animator anim;
 
     
 
 
     void Start()
     {
+        anim.SetBool("isSick",false);                                               //sætter animator bool til false
         flies.Stop();
         targetPos = new Vector3(Random.Range(-x, x), 1, Random.Range(-z, z));       //Lav en random Vector3
-        targetPos = NavMeshUtil.GetRandomPoint(targetPos);                      //Kalder GetRandomPoint fra NavMeshUtil-klassen som er en hjemmelavet klasse. Tilbage kommer en valid position som var tættest på den pos som blev givet som argument.
+        targetPos = NavMeshUtil.GetRandomPoint(targetPos);                          //Kalder GetRandomPoint fra NavMeshUtil-klassen som er en hjemmelavet klasse. Tilbage kommer en valid position som var tættest på den pos som blev givet som argument.
         agent.SetDestination(targetPos);                                            //Set agentens destination
     }
 
@@ -37,8 +39,10 @@ public class Person : MonoBehaviour
             agent.SetDestination(targetPos);                                        //Set agentens position
         }
 
-        if (isSick == true)
+        if (isHumanSick == true)
         {
+            anim.SetBool("isSick", true);
+            agent.speed = 7;
             rend.material.color = new Color(0, 0, 0);
 
             if (flies.isStopped == true)
@@ -50,7 +54,7 @@ public class Person : MonoBehaviour
 
         for (int i = 0; i < nearbyAgents.Count; i++)
         {
-            if (nearbyAgents[i].GetComponent<Person>().isSick == true)
+            if (nearbyAgents[i].GetComponent<Person>().isHumanSick == true)
             {
                 if (nearbySickAgents.Contains(nearbyAgents[i]) == false)
                 {
@@ -96,7 +100,7 @@ public class Person : MonoBehaviour
 
         if (infectiousness * 0.02 * (float)nearbySickAgents.Count  > Random.Range(0f,1f))
         {
-            isSick = true;
+            isHumanSick = true;
         }
     }
 }

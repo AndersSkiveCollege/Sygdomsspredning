@@ -38,7 +38,7 @@ public class SicknessGraph : MonoBehaviour
 
         foreach (GameObject person in allPeople)
         {
-            if (person.GetComponent<Person>().isSick == true)
+            if (person.GetComponent<Person>().isHumanSick == true)
             {
                 numberOfSickPeople++;
             }
